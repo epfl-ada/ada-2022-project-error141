@@ -16,18 +16,13 @@ We decided to base our analysis on the plot summary of the movies. As an additio
 
 ## Proposed timeline & organisation of the team
 
-21.11.2022 Optimize and complete  the NLP summary pipeline 
-
-28.11.2022 Project Pause
-
-02.12.2022 Homework 2 Deadline
-
-05.12.2022 Process all summaries through the NLP pipeline, and define the activeness score. 
-
-12.12.2022 Visualisation of the results
-
-19.12.2022 Develop the web interface and  the final text for the data story. <br>
-24.12.2022 Milestone 3 Deadline
+21.11.2022 Optimize and complete  the NLP summary pipeline <br>
+28.11.2022 Project Pause <br>
+02.12.2022 **Homework 2 Deadline** <br>
+05.12.2022 Process all summaries through the NLP pipeline, and define the activeness score <br>
+12.12.2022 Visualisation of the results <br>
+19.12.2022 Develop the web interface and  the final text for the data story <br>
+24.12.2022 **Milestone 3 Deadline**
 
 ## Team Organization
 <table class="tg" style="undefined;table-layout: fixed; width: 342px">

@@ -26,8 +26,7 @@ We decided to base our analysis on the plot summary of the movies. As an additio
 
 12.12.2022 Visualisation of the results
 
-19.12.2022 Develop the web interface and  the final text for the data story.
-
+19.12.2022 Develop the web interface and  the final text for the data story. <br>
 24.12.2022 Milestone 3 Deadline
 
 ## Team Organization

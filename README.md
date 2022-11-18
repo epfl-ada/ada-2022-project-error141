@@ -27,6 +27,8 @@ Taking into account the presented data exploration, we are convinced that the da
 
 Here is the intended pipeline for the summary analysis. We first start by clustering the name of the character with all its references, including pronouns and the nouns referring to it such as the doctor, the girl, and so on in order to replace in the references by the true name of the character. For this, we use a neural network specially trained for coreference resolution from AllenNLP library. Additionally, the gender of each character is determined thanks to the pronouns in the cluster of each character. If some genders remain undefined, first, the character metadata is used, then, if necessary a gender discriminator from the gender_guesser library is employed. Next, grammatical tagging is performed on the summary using the POS module from the spacy NLP library. According to the verb tense, it is classified as active or passive verb and a list per category is generated for each character. Moreover, descriptive adjectives and nouns are also extracted. Furthermore, the type of each verb in terms of activeness of the meaning will be determined. The latter can be achieved by using a dictionary, sentiment analysis or manual labelling into action vs description. Finally, an activeness score is attributed to each character which will be used to predict the gender of unknown characters.
 
+[1]: https://en.wikipedia.org/wiki/Gender_bias_on_Wikipedia 
+
 ## Proposed timeline & organisation of the team
 
 21.11.2022 Optimize and complete  the NLP summary pipeline <br>

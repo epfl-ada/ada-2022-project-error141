@@ -22,7 +22,7 @@ Next, it is assessed that the distribution of the U.S. dataset reflects the dist
 In order to confirm the statement that female characters are less empowered than male characters in movies, we first compared the number of female vs male characters in movies (32% female vs 68% male) which shows that women are much less represented. To go further in the analysis, we observed the evolution of the number of characters by gender for American movies. As previously mentioned in the abstract, the typical role of the character depending on the gender is very different. 
 
 <p align="center">
-  <img src="./figures/distribution_M_F_time.pn”g alt="topic clusters" width="600"/>
+  <img src="./figures/distribution_M_F_time.png”g alt="topic clusters" width="600"/>
 </p>
 
 To visualize this point, we plotted the genres of the movies by order of highest number of male characters and the top 10 were kept. A similar plot was performed by considering the female characters. Even though some of the genres are shared by both plots, the distribution is not the same. For example, 5 out of 10 of the top genres of female characters are related to romance, family or music whereas male characters are much more present in movies related to action, danger and adventure. To attempt to get a general idea of the evolution of these numbers, we investigated the possible increase of female characters in two stereoptypical genres for male and female characters. A general trend of decrease in the difference between the percentage of male and female characters can be observed.

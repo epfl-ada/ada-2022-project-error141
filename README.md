@@ -22,7 +22,7 @@ We decided to base our analysis on the plot summary of the movies. As an additio
 05.12.2022 Process all summaries through the NLP pipeline, and define the activeness score <br>
 12.12.2022 Visualisation of the results <br>
 19.12.2022 Develop the web interface and  the final text for the data story <br>
-24.12.2022 **Milestone 3 Deadline**
+23.12.2022 **Milestone 3 Deadline**
 
 ## Team Organization
 <table class="tg" style="undefined;table-layout: fixed; width: 342px">

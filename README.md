@@ -25,7 +25,7 @@ In order to confirm the statement that female characters are less empowered than
   <img src="./figures/distribution_M_F_time.png" alt="topic clusters" width="600"/>
 </p>
 
-As previously mentioned in the abstract, the typical role of the character depending on the gender is very different. To visualize this point, we plotted the genres of the movies by order of highest number of male characters and the top 10 were kept. A similar plot was performed by considering the female characters. Even though some of the genres are shared by both plots, the distribution is not the same. For example, 5 out of 10 of the top genres of female characters are related to romance, family or music whereas male characters are much more present in movies related to action, danger and adventure. To attempt to get a general idea of the evolution of these numbers, we investigated the possible increase of female characters in two stereoptypical genres for male and female characters. A general trend of decrease in the difference between the percentage of male and female characters can be observed.
+As previously mentioned in the abstract, the typical role of the character depending on the gender is very different. To visualize this point, we plotted the genres of the movies by order of highest number of male characters and the top 10 were kept. A similar plot was performed by considering the female characters. Even though some of the genres are shared by both plots, the distribution is not the same. For example, 5 out of 10 of the top genres of female characters are related to romance, family or music whereas male characters are much more present in movies related to action, danger and adventure. To attempt to get a general idea of the evolution of these numbers, we investigated the possible increase of female characters in two stereotypical genres for male and female characters. A general trend of decrease in the difference between the percentage of male and female characters can be observed.
 These preliminary results support the aim of the project.
 For the summary to be moderately representative of the movie scenario and the type of role of the main characters, it is necessary to exploit only the summaries that have at least 350 words. The last and the previously mentioned restrictions yield a subset of 7714 movies. However, note that there is a bias in the content of the summaries due to the fact that most Wikipedia writers (around 85%) are men.[[1]]
 
@@ -37,7 +37,7 @@ Here is the intended pipeline for the summary analysis. We first start by cluste
   <img src="./figures/example_POS.png" alt="topic clusters" width="1000"/>
 </p>
 
-Furthermore, the type of each verb in terms of activeness of the meaning will be determined. The latter can be achieved by using a dictionary, sentiment analysis or manual labelling into action vs description. Finally, an activeness score is attributed to each character which will be used to predict the gender of unknown characters.
+Furthermore, the type of each verb in terms of activeness of the meaning will be determined. The latter can be achieved by using a dictionary, sentiment analysis or manual labeling into action vs description. Finally, an activeness score is attributed to each character which will be used to predict the gender of unknown characters.
 
 [1]: https://en.wikipedia.org/wiki/Gender_bias_on_Wikipedia 
 

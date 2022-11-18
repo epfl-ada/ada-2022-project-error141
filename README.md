@@ -9,17 +9,17 @@ The damsel in distress is a standard narrative device that portrays female prota
 * Is there any correlation between active/passive roles of a woman and a positive/negative connotation? Are negatively connotated women more active than positively connotated ones? 
 * Can we predict a character’s gender from the verbs and adjectives associated with them?
 
-## Proposed additional dataset
-We decided to base our analysis on the plot summary of the movies. As an additional data set, we use the IMDb dataset (https://www.imdb.com/interfaces) in order to compare the distribution of movies by release year and genres of the CMU corpus and of all movies available on IMDb.
+## Additional dataset
+As an additional dataset, we use the IMDb dataset (https://www.imdb.com/interfaces) to compare the distribution of movies by release year and genres of the CMU and all IMDb movies.
 
 ## Methods
-Before starting the analysis of the plot summaries, a data exploration of the dataset is performed.
+Before starting the analysis of the plot summaries, data exploration is performed.
 
 First, we notice that the distribution of movies through time in the CMU dataset reflects the total distribution of films released worldwide as their evolution is similar. Additionally, the distribution of the genres of movies in our dataset is comparable to the distribution of all movies on IMDb. 
-A first analysis of movie producing countries shows that the United States is the main producer in the 20th century and early 21st century. In order to study an evolution, the project is based on American movies. Indeed, they constitute the largest component of the dataset and so as to avoid possible bias caused by different countries of production and consequently different cultures, we decided to restrain our analysis over this subset. 
-Next, it is assessed that the distribution of the U.S. dataset reflects the distribution of the total dataset in terms of genre. We only considered movies released since 1940 as the number of movies released the years before was too low for a meaningful analysis.
+A first analysis of movie-producing countries shows that the United States is the main producer in the 20th century and early 21st century. In order to study an evolution, the project is based on American movies. Indeed, they constitute the largest component of the dataset and so as to avoid possible bias caused by different countries of production and consequently different cultures, we decided to restrain our analysis over this subset. 
+Next, we assess that the distribution of the U.S. dataset reflects the distribution of the total dataset in terms of genre. We only considered movies released since 1940 as the number of movies released the years before was too low for a meaningful analysis.
 
-In order to confirm the statement that female characters are less empowered than male characters in movies, we first compared the number of female vs male characters in movies (32% female vs 68% male) which shows that women are much less represented. 
+In order to confirm the statement that female characters are less empowered than male characters, we first compared the number of female vs male characters in movies (32% female vs 68% male) which shows that women are much less represented. 
 
 <p align="center">
   <img src="./figures/distribution_M_F_time.png" alt="topic clusters" width="600"/>
@@ -43,13 +43,13 @@ Furthermore, the type of each verb in terms of activeness of the meaning will be
 
 ## Proposed timeline
 
-21.11.2022 Optimize and complete  the NLP summary pipeline <br>
-28.11.2022 Project Pause <br>
-02.12.2022 **Homework 2 Deadline** <br>
-05.12.2022 Process all summaries through the NLP pipeline, and define the activeness score <br>
-12.12.2022 Visualisation of the results <br>
-19.12.2022 Develop the web interface and  the final text for the data story <br>
-23.12.2022 **Milestone 3 Deadline**
+21.11.2022-Optimize and complete NLP summary pipeline <br>
+28.11.2022-Pause<br>
+02.12.2022-**Homework 2 Deadline** <br>
+05.12.2022-Process all summaries through NLP pipeline, and define activeness score <br>
+12.12.2022-Visualisation of the results <br>
+19.12.2022-Develop the web interface and the data story <br>
+23.12.2022-**Milestone 3 Deadline**
 
 ## Team Organization
 <table class="tg" style="undefined;table-layout: fixed; width: 342px">

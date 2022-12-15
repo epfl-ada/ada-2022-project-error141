@@ -240,3 +240,206 @@ def get_assos_verb(child, verb):
                                 indirect = [z for z in y.children]
 
     return assos_verbs
+
+#Get active/passive verbs + descriptive noun+adjective associated to characters
+def extraction_words(doc, family_occupation):
+    active = []; passive = []; description = []
+    for i, token in enumerate(doc):
+
+        #Get active/passive verbs
+        if token.pos_ == 'VERB':
+
+            #Get verb and associated verbs
+            verb = get_verb(token, doc, i)
+
+            for child in token.children:
+
+                #Get passive for peter -> "Martine throwed a rock at Peter.
+                if child.dep_ == 'prep':
+                    for x in child.children:
+                        if x.dep_ == 'pobj' and x.ent_type_ == 'PERSON':
+                            passive.append([(x.text.lower(), verb)])
+
+                #Gramatically active verbs
+                if child.dep_ == 'nsubj':
+                    active.append(get_assos_verb(child, verb))
+
+                if child.dep_ == 'agent':
+                    for x in child.children:
+                        if x.dep_ == 'pobj':
+                            active.append(get_assos_verb(x, verb)) 
+
+
+                #Gramatically passive verb
+                if child.dep_ == 'nsubjpass':
+                    passive.append(get_assos_verb(child, verb))
+
+                if child.dep_ == 'dobj':
+                    passive.append(get_assos_verb(child, verb))
+
+        #Get descriptive adjectives/nouns + 
+        #get throw for martine ('Martine who once throw a rock at Peter')
+        elif token.ent_type_ == 'PERSON':
+            for child in token.children:
+
+                if child.pos_ == 'ADJ':
+                    description.append([(token.text.lower(), child.lemma_ )])
+
+                elif child.pos_ == 'NOUN' and child.dep_ == 'appos':
+
+                    noun = child.lemma_
+                    modifiers = [x.text for x in child.children if x.dep_ == 'amod']
+                    if modifiers:
+                        noun = ' '.join(modifiers) + ' ' + noun 
+                    if child.lemma_ in family_occupation:
+                        description.append([(token.text.lower(), noun)])
+
+                #Martine who did not like the cake
+                    for x in child.children:
+                        if x.pos_ == 'VERB' and x.dep_ == 'relcl':
+                            for y in x.children:
+                                if y.dep_ == 'nsubj':
+                                    active.append([(token.text.lower(), x.lemma_.lower())])
+                                elif y.dep_== 'nsubjpass':
+                                    passive.append([(token.text.lower(), x.lemma_.lower())])
+
+                elif child.pos_ == 'VERB' and child.dep_ == 'relcl':
+                    for y in child.children:
+                                if y.dep_ == 'nsubj':
+                                    active.append([(token.text.lower(), child.lemma_.lower())])
+                                elif y.dep_== 'nsubjpass':
+                                    passive.append([(token.text.lower(), child.lemma_.lower())])
+
+
+        elif token.pos_ == 'NOUN':
+            noun = token.lemma_ 
+            modifiers = [x.text for x in token.children if x.dep_ == 'amod']
+            if modifiers:
+                noun = ' '.join(modifiers) + ' ' + noun
+            for child in token.children:
+                if child.ent_type_ == 'PERSON' and child.dep_ == 'appos':
+                    if token.lemma_.lower() in family_occupation:
+                        description.append([(child.text.lower(), noun)])
+
+        elif token.pos_ == 'AUX':
+            word = []; subject = []
+            for child in token.children:
+                if child.dep_ == 'nsubj':
+                    subject = [i[0].lower() for i in get_assos_verb(child, '')]
+                elif child.dep_ in ['attr','acomp']:
+                    if child.pos_ == 'ADJ' or child.lemma_.lower() in family_occupation:
+                        word = child.text
+
+            if subject and word:
+                description.append([(subj, word) for subj in subject])
+
+    active = list(chain(*active)); passive = list(chain(*passive))
+    description = list(chain(*description))
+    
+    #Concanate all verb associated to a given character
+    active = pd.DataFrame(active, columns=['charac_name', 'verb']).groupby('charac_name')['verb'].apply(list)
+    active = active.apply(lambda x: list(chain(*[i.split() for i in x])))
+    passive = pd.DataFrame(passive, columns=['charac_name', 'verb']).groupby('charac_name')['verb'].apply(list)
+    passive = passive.apply(lambda x: list(chain(*[i.split() for i in x])))
+
+    description = pd.DataFrame(description, columns=['charac_name', 'verb']).groupby('charac_name')['verb'].apply(list)
+    description = description.apply(lambda x: list(chain(*[i.split() for i in x])))
+    
+    return active, passive, description
+
+def get_unique_name (name, list_names):
+    name = name.lower()
+    mask_unique_name = np.where([list_names.count(x) < 2 for x in name.split()])[0]
+    
+    return " ".join(np.array(name.split())[mask_unique_name])
+
+def replace_name(name, names_df):
+
+    temp  = [y for x in name.split() for y in names_df if find_whole_word(x, y.lower().split())]
+
+    return temp[0] if temp else None
+
+def character_replace_name(df, all_names): 
+    name = [replace_name(x, all_names) for x in df.index]
+    return name
+
+#Link extraction of words from nlp to character metadata
+def link_to_df(df, active, passive, description):
+    #Only keep the unique name
+    names = list(chain(*[x.lower().split() for x in list(df.index)]))
+
+    df.reset_index(inplace=True); df = df.rename(columns = {'index':'name'})
+    df.name = df.name.apply(get_unique_name, args=(names,))
+    
+    #Format active, passive, decription dataframe
+    active.index = character_replace_name(active, list(df.name))
+    active = pd.DataFrame(active); active.reset_index(inplace=True); active = active.rename(columns = {'index':'name', 'verb': 'active'})
+    active = active.groupby(['name'])['active'].apply(lambda x: ','.join(x.astype(str))).reset_index()
+
+    passive.index = character_replace_name(passive, list(df.name))
+    passive = pd.DataFrame(passive); passive.reset_index(inplace=True); passive = passive.rename(columns = {'index':'name', 'verb': 'passive'})
+    passive = passive.groupby(['name'])['passive'].apply(lambda x: ','.join(x.astype(str))).reset_index()
+
+    description.index = character_replace_name(description, list(df.name))
+    description = pd.DataFrame(description); description.reset_index(inplace=True); description = description.rename(columns = {'index':'name', 'verb':'description'})
+    description = description.groupby(['name'])['description'].apply(lambda x: ','.join(x.astype(str))).reset_index()
+    
+    #Merge on name
+    df = pd.merge(df, active, how='left', on = 'name')
+    df = pd.merge(df, passive, how='left', on = 'name')
+    df = pd.merge(df, description, how='left', on = 'name')
+    
+    return df
+
+#Concatenate all steps of the nlp pipeline
+def process_summary(summary, character, predictor, words_remove, family_occupation, gender_guesser):
+    #Remove all charcater with non-defined name in characater metadata
+    character = character[character['name'].notna()]
+    
+    #Load the pre-trained spacy module
+    nlp = spacy.load("en_core_web_trf")
+    
+    #Run coref resolution
+    coref_summary, coref_character = coreference_resolution(summary, nlp, predictor)
+    
+    #Add character from coref resolution to character metadata
+    to_add = add_character_from_coref(coref_character,character)
+    character = pd.concat([character, to_add], sort=False)
+
+    #Remove all words from the passed list
+    character = character_remove_words(words_remove, character)
+
+    #Add entity ruler
+    nlp = add_character_entity_ruler_to_nlp(nlp, character)
+    character = character.set_index('name')
+    
+    #Run summary through nlp pipeline
+    doc = nlp(coref_summary)
+    
+    #Get count of mentions of character in summary
+    named_ent = [X.text if X.id_ == '' else X.id_ for X in doc.ents if X.label_== 'PERSON']
+    c, counts = np.unique(named_ent, return_counts = True)
+    df = pd.DataFrame(counts, index = c, columns=['mention'])
+    df = df.sort_values(by=['mention'], ascending=False)
+    
+    #Merge with character metadata
+    df = pd.merge(df, character, how='left', left_index=True, right_index=True)
+    
+    #Get passive/active verbs and description
+    active, passive, description = extraction_words(doc, family_occupation)
+    
+    #Link verb/noun/adjective list to character
+    df = link_to_df(df, active, passive, description)
+    
+    #Use gender_guesser to guess remaining character with non defined gender 
+    df.loc[df['gender'].isna(),'gender'] = df[df['gender'].isna()].name.apply(lambda x: gender_guesser.get_gender(x))
+    df.loc[~df['gender'].isin(['M','F']),'gender'] = df.gender.apply(
+        lambda x: 'M' if (x == 'male' or x =='mostly_male') else ('F' if (x == 'female' or x =='mostly_female')  else np.NaN))
+    
+    #Remove character with no defined gender
+    df = df[df['gender'].notna()]
+    
+    #Remove all charcater with non-defined name in characater metadata
+    df = df[df['name']!= '']
+    
+    return df

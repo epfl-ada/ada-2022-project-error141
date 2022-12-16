@@ -197,8 +197,9 @@ def get_verb(token, doc, i):
         verb = verb + ' ' + conj_verb[0]
         
     #Look for verb to verb pattern
-    if doc[i+1].text == 'to' and doc[i+2].pos_ == 'VERB':
-        verb = verb + ' ' + doc[i+2].text
+    if i + 2 < len(doc):
+        if doc[i+1].text == 'to' and doc[i+2].pos_ == 'VERB':
+            verb = verb + ' ' + doc[i+2].text
         
     return verb
 

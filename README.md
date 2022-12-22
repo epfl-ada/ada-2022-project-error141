@@ -5,8 +5,7 @@ The damsel in distress is a standard narrative device that portrays female prota
 ## Research questions: 
 * How has the role of women in American cinema evolved through the decades? 
 * Are women having more active roles lately? Is this activeness more related to the film genres that women usually play in, for example, family or romantic movies? 
-* What action and descriptive adjectives are most often associated with female characters? Are they different from the ones associated with their male counterpart?
-* Is there any correlation between active/passive roles of a woman and a positive/negative connotation? Are negatively connotated women more active than positively connotated ones? 
+* What action are most often associated with female characters? Are they different from the ones associated with their male counterpart?
 * Can we predict a character’s gender from the verbs and adjectives associated with them?
 
 ## Additional dataset

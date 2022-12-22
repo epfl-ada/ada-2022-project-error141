@@ -108,7 +108,7 @@ def improved_replace_corefs(document, clusters, text):
     return "".join(resolved), character
 
 #Full coreference resolution pipeline 
-def coreference_resolution(text, nlp_pipeline, predictor):
+def coreference_resolution(text:str, nlp_pipeline, predictor):
     prediction = predictor.predict(document=text) 
     clusters = list(pd.Series(prediction['clusters']).apply(order_coreference, args=(prediction['document'],)))
     
@@ -119,7 +119,7 @@ def coreference_resolution(text, nlp_pipeline, predictor):
     
     return coref_text, character
 
-#Improvment to NER functionality
+#Improvment to NER spacy functionality
 #-------------------------------------------------------------------------------------------------
 #Check if a string is contained in the list of words provided
 def find_whole_word(string:str,list_words:list):
@@ -150,7 +150,7 @@ def remove_words(name, words_remove):
     
     return result
 
-#Apply the remove_words on all characters
+#Apply the remove_words function on all characters
 def character_remove_words(words_remove, character):
     #Remove point in name
     character.name = character['name'].apply(lambda x: x.replace('.', ''))
@@ -159,7 +159,7 @@ def character_remove_words(words_remove, character):
     
     return character
 
-#Create pattern for the add_entity module from the character list
+#Create pattern for the add_entity module  of spacy from the character list
 def get_patterns(character):
     patterns = []
     for c in character.name:
@@ -181,9 +181,9 @@ def add_character_entity_ruler_to_nlp(nlp, character):
     
     return nlp
 
-
-#Get active/passive and descriptive adjective+nouns
+#Extraction active/passive and descriptive adjective+nouns
 #------------------------------------------------------------------------------------------------
+#Get the lemma of the verb, see if it is associated with other vers through and and or 'verb to verb' pattern
 def get_verb(token, doc, i):
     #Check if preposition associated with verb
     verb = token.lemma_
@@ -203,6 +203,7 @@ def get_verb(token, doc, i):
         
     return verb
 
+#See if multiple charcaters do the same action
 def get_more_people(child, verb, assos_verbs):
     indirect = [x for x in child.children]
     while indirect:
@@ -214,6 +215,7 @@ def get_more_people(child, verb, assos_verbs):
 
     return assos_verbs
 
+#Extract all verbs assocaited to a character
 def get_assos_verb(child, verb):
     assos_verbs = []
     #Look for direct link with person
@@ -279,7 +281,7 @@ def extraction_words(doc, family_occupation):
                     passive.append(get_assos_verb(child, verb))
 
         #Get descriptive adjectives/nouns + 
-        #get throw for martine ('Martine who once throw a rock at Peter')
+        #throw in passive for martine ('Martine who once throw a rock at Peter')
         elif token.ent_type_ == 'PERSON':
             for child in token.children:
 
@@ -295,7 +297,7 @@ def extraction_words(doc, family_occupation):
                     if child.lemma_ in family_occupation:
                         description.append([(token.text.lower(), noun)])
 
-                #Martine who did not like the cake
+                #Martine who did not like the cake, get like for in passive for Martine
                     for x in child.children:
                         if x.pos_ == 'VERB' and x.dep_ == 'relcl':
                             for y in x.children:
@@ -311,7 +313,7 @@ def extraction_words(doc, family_occupation):
                                 elif y.dep_== 'nsubjpass':
                                     passive.append([(token.text.lower(), child.lemma_.lower())])
 
-
+        #Get noun associated to characters
         elif token.pos_ == 'NOUN':
             noun = token.lemma_ 
             modifiers = [x.text for x in token.children if x.dep_ == 'amod']
@@ -322,6 +324,7 @@ def extraction_words(doc, family_occupation):
                     if token.lemma_.lower() in family_occupation:
                         description.append([(child.text.lower(), noun)])
 
+        #Get noun associated to characters
         elif token.pos_ == 'AUX':
             word = []; subject = []
             for child in token.children:
@@ -334,6 +337,7 @@ def extraction_words(doc, family_occupation):
             if subject and word:
                 description.append([(subj, word) for subj in subject])
 
+    #Format the extracted list
     active = list(chain(*active)); passive = list(chain(*passive))
     description = list(chain(*description))
     
@@ -348,18 +352,21 @@ def extraction_words(doc, family_occupation):
     
     return active, passive, description
 
+#Find unique name of charater eg. if two characters have the same last name only keep first name in name column
 def get_unique_name (name, list_names):
     name = name.lower()
     mask_unique_name = np.where([list_names.count(x) < 2 for x in name.split()])[0]
     
     return " ".join(np.array(name.split())[mask_unique_name])
 
+#Remplace the name of character in extracted list of verbs by the name in the character data
 def replace_name(name, names_df):
 
     temp  = [y for x in name.split() for y in names_df if find_whole_word(x, y.lower().split())]
 
     return temp[0] if temp else None
 
+#Apply replace_name function to all character in dataframe
 def character_replace_name(df, all_names): 
     name = [replace_name(x, all_names) for x in df.index]
     return name

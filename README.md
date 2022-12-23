@@ -2,6 +2,15 @@
 
 ## Data story website: https://eerror141.github.io/
 
+## Code Architechture 
+
+* data_exploration.ipynb
+* nlp_analysis.ipynb
+* nlp_pipeline.py
+* NLP_process_summaries.ipynb
+* README.md
+
+
 ## Notebook structure 
 
 

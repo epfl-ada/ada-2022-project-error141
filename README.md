@@ -6,7 +6,7 @@
 
 * data_exploration.ipynb : initial CMU dataset visualization, exploration NLP pipeline, process of all summaries with NLP pipeline
 * nlp_analysis.ipynb : analysis result NLP pipeline process (comparison mentions female and male characters, statistical analysis)
-* nlp_pipeline.py: all function for the nlp pipeline (coreference resolution, verb extraction,..)
+* nlp_pipeline.py: all functions for the nlp pipeline (coreference resolution, verb extraction,..)
 
 
 ## Abstract

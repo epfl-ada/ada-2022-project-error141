@@ -13,7 +13,6 @@ The damsel in distress is a standard narrative device that portrays female prota
 * How has the role of women in American cinema evolved through the decades? 
 * Are women having more active roles lately? Is this activeness more related to the film genres that women usually play in, for example, family or romantic movies? 
 * What action are most often associated with female characters? Are they different from the ones associated with their male counterpart?
-* Can we predict a character’s gender from the verbs and adjectives associated with them?
 
 ## Additional dataset
 As an additional dataset, we use the IMDb dataset (https://www.imdb.com/interfaces) to compare the distribution of movies by release year and genres of the CMU and all IMDb movies.
@@ -46,16 +45,6 @@ Here is the intended pipeline for the summary analysis. We first start by cluste
 Furthermore, the type of each verb in terms of activeness of the meaning will be determined. The latter can be achieved by using a dictionary, sentiment analysis or manual labeling into action vs description. Finally, an activeness score is attributed to each character which will be used to predict the gender of unknown characters.
 
 [1]: https://en.wikipedia.org/wiki/Gender_bias_on_Wikipedia 
-
-## Proposed timeline
-
-21.11.2022-Optimize and complete NLP summary pipeline <br>
-28.11.2022-Pause<br>
-02.12.2022-**Homework 2 Deadline** <br>
-05.12.2022-Process all summaries through NLP pipeline, and define activeness score <br>
-12.12.2022-Visualisation of the results <br>
-19.12.2022-Develop the web interface and the data story <br>
-23.12.2022-**Milestone 3 Deadline**
 
 ## Team Organization
 <table class="tg" style="undefined;table-layout: fixed; width: 342px">

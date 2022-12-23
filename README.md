@@ -4,8 +4,8 @@
 
 ## Code Architechture 
 
-* data_exploration.ipynb
-* nlp_analysis.ipynb
+* data_exploration.ipynb : initial CMU dataset visualization, exploration NLP pipeline, process of all summaries with NLP pipeline
+* nlp_analysis.ipynb : analysis result NLP pipeline process (comparison mentions female and male characters, statistical analysis)
 * nlp_pipeline.py
 * NLP_process_summaries.ipynb
 * README.md

@@ -51,7 +51,7 @@ Here is the intended pipeline for the summary analysis. We first start by cluste
   <img src="./figures/example_POS.png" alt="topic clusters" width="1000"/>
 </p>
 
-Furthermore, the type of each verb in terms of activeness of the meaning will be determined. The latter can be achieved by using a dictionary, sentiment analysis or manual labeling into action vs description. Finally, an activeness score is attributed to each character which will be used to predict the gender of unknown characters.
+Furthermore, the type of each verb in terms of activeness of the meaning will be determined and an activeness score will be attributed to each character. Finally, we decided to cluster the most frequent verbs into three stereotypical categories (violence,love,power).
 
 [1]: https://en.wikipedia.org/wiki/Gender_bias_on_Wikipedia 
 

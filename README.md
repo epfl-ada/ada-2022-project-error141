@@ -6,17 +6,11 @@
 
 * data_exploration.ipynb : initial CMU dataset visualization, exploration NLP pipeline, process of all summaries with NLP pipeline
 * nlp_analysis.ipynb : analysis result NLP pipeline process (comparison mentions female and male characters, statistical analysis)
-* nlp_pipeline.py
-* NLP_process_summaries.ipynb
-* README.md
-
-
-## Notebook structure 
-
+* nlp_pipeline.py: all function for the nlp pipeline (coreference resolution, verb extraction,..)
 
 
 ## Abstract
-The damsel in distress is a standard narrative device that portrays female protagonists in the face of perilous situations as completely helpless. Indeed, they constantly need a male savior to help them escape their dangerous predicaments. Their agency is completely stripped away from them. More generally, women in the media are often portrayed as passive participants of narratives. They are only tools to provide motivation and purpose to the lead male characters. Using the movie summary corpus, our project aims to explore the "activeness" of female characters in movies and its evolution through time. Using natural language processing, the latter would be performed by searching for verbs and adjectives associated with the female characters in the summary and by investigating what type of power it gives to it. For homogeneity reasons, we decided to focus on US movies since 1940.
+The damsel in distress is a standard narrative device that portrays female protagonists in the face of perilous situations as completely helpless. Indeed, they constantly need a male savior to help them escape their dangerous predicaments. Their agency is completely stripped away from them. More generally, women in the media are often portrayed as passive participants of narratives. They are only tools to provide motivation and purpose to the lead male characters. Using the movie summary corpus, our project aims to explore the "activeness" of female characters in movies and its evolution through time. Using natural language processing, the latter would be performed by searching for verbs associated with the female characters in the summary. For homogeneity reasons, we decided to focus on US movies since 1940.
 
 ## Research questions: 
 * How has the role of women in American cinema evolved through the decades? 
@@ -51,7 +45,7 @@ Here is the intended pipeline for the summary analysis. We first start by cluste
   <img src="./figures/example_POS.png" alt="topic clusters" width="1000"/>
 </p>
 
-Furthermore, the type of each verb in terms of activeness of the meaning will be determined and an activeness score will be attributed to each character. Finally, we decided to cluster the most frequent verbs into three stereotypical categories (violence,love,power).
+Furthermore, the type of each verb in terms of activeness of the meaning will be determined and an activeness score will be attributed to each character. Finally, we decided to cluster the most frequent verbs into three stereotypical categories (violence, love, power).
 
 [1]: https://en.wikipedia.org/wiki/Gender_bias_on_Wikipedia 
 

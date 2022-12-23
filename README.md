@@ -2,7 +2,7 @@
 
 ## Data story website: https://eerror141.github.io/
 
-## Code Architechture 
+## Code Architecture 
 
 * data_exploration.ipynb : initial CMU dataset visualization, exploration NLP pipeline, process of all summaries with NLP pipeline
 * nlp_analysis.ipynb : analysis result NLP pipeline process (comparison mentions female and male characters, statistical analysis)

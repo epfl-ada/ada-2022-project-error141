@@ -8,6 +8,8 @@
 * nlp_analysis.ipynb : analysis result NLP pipeline process (comparison mentions female and male characters, statistical analysis)
 * nlp_pipeline.py: all functions for the nlp pipeline (coreference resolution, verb extraction,..)
 
+The process data (pickle format) is available at: https://drive.google.com/drive/folders/1zaGqISM1bhqk5quImi-yiHbVZkD3mSMx?usp=sharing
+
 
 ## Abstract
 The damsel in distress is a standard narrative device that portrays female protagonists in the face of perilous situations as completely helpless. Indeed, they constantly need a male savior to help them escape their dangerous predicaments. Their agency is completely stripped away from them. More generally, women in the media are often portrayed as passive participants of narratives. They are only tools to provide motivation and purpose to the lead male characters. Using the movie summary corpus, our project aims to explore the "activeness" of female characters in movies and its evolution through time. Using natural language processing, the latter would be performed by searching for verbs associated with the female characters in the summary. For homogeneity reasons, we decided to focus on US movies since 1940.
